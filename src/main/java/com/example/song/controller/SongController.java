@@ -1,0 +1,26 @@
+/*
+ * 
+ * You can use the following import statements
+ * 
+ * import org.springframework.web.bind.annotation.*;
+ * import java.util.*;
+ *
+ */
+
+// Write your code here
+package com.example.song.controller;
+
+import org.springframework.web.bind.annotation.*;
+import java.util.*;
+import org.springframework.beans.factory.annotation.Autowired;
+
+
+import com.example.song.service.SongH2Service;
+import com.example.song.model.Song;
+
+@RestController
+public class SongController{
+
+    @Autowired
+    public SongH2Service service;
+}

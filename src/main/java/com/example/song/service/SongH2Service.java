@@ -17,6 +17,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import java.util.*;
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.http.HttpStatus;
 
 import com.example.song.model.Song;
 import com.example.song.repository.SongRepository;
@@ -42,7 +44,31 @@ public class SongH2Service implements SongRepository{
 
     @Override
     public Song getSongById(int songId){
-        Song song = db.queryForObject("SELECT * FROM PLAYLIST WHERE songId=?",new SongRowMapper(),songId);
-        return song;
+        try{
+            Song song = db.queryForObject("SELECT * FROM PLAYLIST WHERE songId=?",new SongRowMapper(),songId);
+            return song;
+        }
+        catch(Exception e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+       
     }
+
+    @Override
+    public Song updateSong(int songId, Song song) {
+        if (song.getSongName() != null) {
+            db.update("UPDATE PLAYLIST SET songName=? WHERE songId=?", song.getSongName(), songId);
+        }
+        if (song.getLyricist() != null) {
+            db.update("UPDATE PLAYLIST SET lyricist=? WHERE songId=?", song.getLyricist(), songId);
+        }
+        if (song.getSinger() != null) {
+            db.update("UPDATE PLAYLIST SET singer=? WHERE songId=?", song.getSinger(), songId);
+        }
+        if (song.getMusicDirector() != null) {
+            db.update("UPDATE PLAYLIST SET musicDirector=? WHERE songId=?", song.getMusicDirector(), songId);
+        }
+        return getSongById(songId);
+    }
+
 }

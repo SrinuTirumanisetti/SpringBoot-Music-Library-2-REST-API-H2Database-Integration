@@ -8,4 +8,5 @@ public interface SongRepository{
     public ArrayList<Song> getSongs();
     public Song addSong(Song song);
     public Song getSongById(int songId);
+    public Song updateSong(int songId,Song song);
 }

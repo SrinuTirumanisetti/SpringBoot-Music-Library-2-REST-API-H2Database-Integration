@@ -32,4 +32,11 @@ public class SongH2Service implements SongRepository{
         Collection<Song> songList = db.query("SELECT * FROM PLAYLIST",new SongRowMapper());
         return new ArrayList<>(songList);
     }
+
+    @Override
+    public Song addSong(Song song){
+        db.update("INSERT INTO PLAYLIST(songName,lyricist,singer,musicDirector) Values(?,?,?,?)", song.getSongName(),song.getLyricist(),song.getSinger(),song.getMusicDirector());
+        Song addedSong = db.queryForObject("SELECT * FROM PLAYLIST WHERE songName=? AND singer=?",new SongRowMapper(),song.getSongName(),song.getSinger());
+        return addedSong;
+    }
 }

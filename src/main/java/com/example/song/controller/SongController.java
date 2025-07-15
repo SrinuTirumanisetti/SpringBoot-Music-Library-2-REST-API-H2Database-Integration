@@ -28,4 +28,9 @@ public class SongController{
     public ArrayList<Song> getSongs(){
         return service.getSongs();
     }
+    
+    @PostMapping("/songs")
+    public Song addSong(@RequestBody Song song){
+        return service.addSong(song);
+    }
 }

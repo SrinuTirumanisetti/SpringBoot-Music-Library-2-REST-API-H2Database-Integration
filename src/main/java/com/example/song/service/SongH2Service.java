@@ -39,4 +39,10 @@ public class SongH2Service implements SongRepository{
         Song addedSong = db.queryForObject("SELECT * FROM PLAYLIST WHERE songName=? AND singer=?",new SongRowMapper(),song.getSongName(),song.getSinger());
         return addedSong;
     }
+
+    @Override
+    public Song getSongById(int songId){
+        Song song = db.queryForObject("SELECT * FROM PLAYLIST WHERE songId=?",new SongRowMapper(),songId);
+        return song;
+    }
 }

@@ -43,4 +43,9 @@ public class SongController{
     public Song updateSong(@RequestBody Song song,@PathVariable("songId") int songId){
         return service.updateSong(songId,song);
     }
+
+    @DeleteMapping("/songs/{songId}")
+    public void deleteSong(@PathVariable("songId") int songId){
+        service.deleteSong(songId);
+    }
 }

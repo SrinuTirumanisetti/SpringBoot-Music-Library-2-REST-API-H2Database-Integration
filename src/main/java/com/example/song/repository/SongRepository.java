@@ -9,4 +9,5 @@ public interface SongRepository{
     public Song addSong(Song song);
     public Song getSongById(int songId);
     public Song updateSong(int songId,Song song);
+    public void deleteSong(int songId);
 }

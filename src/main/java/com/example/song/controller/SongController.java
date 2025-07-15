@@ -23,4 +23,9 @@ public class SongController{
 
     @Autowired
     public SongH2Service service;
+
+    @GetMapping("/songs")
+    public ArrayList<Song> getSongs(){
+        return service.getSongs();
+    }
 }
